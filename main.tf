@@ -59,6 +59,6 @@ resource "aws_docdb_cluster_instance" "cluster_instances" {
   instance_class     = var.instance_class
   tags = merge(
     local.common_tags,
-    { Name = "${var.env}-docdb-cluster-instances-$(count.index+1)"
+    { Name = "${var.env}-docdb-cluster-instances-$(count.index+1)"}
   )
 }
