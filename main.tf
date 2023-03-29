@@ -39,7 +39,7 @@ resource "aws_security_group" "docdb" {
   resource "aws_docdb_cluster" "docdb" {
   cluster_identifier      = "${var.env}-docdb-cluster"
   engine                  = "docdb"
-  engine_version = "4.0.0"
+  engine_version          = var.engine_version
   master_username         = data.aws_ssm_parameter.DB_ADMIN_USER.value
   master_password         = data.aws_ssm_parameter.DB_ADMIN_PASS.value
   skip_final_snapshot     = true
@@ -83,8 +83,8 @@ resource "aws_ssm_parameter" "docdb_url_user" {
 }
 
 resource "aws_ssm_parameter" "docdb_url" {
-  //name  = "${var.env}.docdb.DOCDB_URL"
-  name = "${var.env}.docdb.docdb_url"
+  name  = "${var.env}.docdb.DOCDB_URL"
+  //name = "${var.env}.docdb.docdb_url"
   type  = "String"
   value = aws_docdb_cluster.docdb.endpoint
 }
